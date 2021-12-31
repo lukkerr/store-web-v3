@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/product")
 public class ProductResource {
 
     private final ProductRepository productRepository;
@@ -17,12 +16,12 @@ public class ProductResource {
         this.productRepository = productRepository;
     }
 
-    @GetMapping("/")
+    @GetMapping("/api/product")
     public List<Product> listProducts() {
         return productRepository.getProductList();
     }
 
-    @PostMapping("/")
+    @PostMapping("/api/product")
     public ResponseEntity<Void> createProduct(@RequestBody Product product) {
         if (productRepository.add(product)) {
             return ResponseEntity.ok().build();
@@ -31,10 +30,12 @@ public class ProductResource {
         }
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping("/api/product")
     public ResponseEntity<Void> deleteProduct(@RequestBody Product product) {
-        productRepository.remove(product);
-        return ResponseEntity.ok().build();
+        if( productRepository.remove(product) )
+        	return ResponseEntity.ok().build();
+        else
+        	return ResponseEntity.badRequest().build();
     }
 
 

@@ -1,5 +1,9 @@
 package br.edu.ifpb.padroes.storewebv3.domain;
 
+//Padrão de Visitor
+
+
+
 public class Product {
 
     private Long id;
@@ -46,5 +50,9 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    public void accept(Visitor visitor){
+        visitor.visit(this);
     }
 }

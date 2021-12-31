@@ -9,7 +9,7 @@ public class Order {
 
     private String strapaKey;
 
-    private Date created;
+    private Date created = new Date();
 
     private boolean processed = false;
 
